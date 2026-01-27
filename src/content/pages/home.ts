@@ -1,4 +1,5 @@
 import { HomePageContent } from '@/types/content';
+import { allProjects, projectCategories } from '@/content/projects';
 
 export const homePageContent: HomePageContent = {
   seo: {
@@ -176,62 +177,8 @@ export const homePageContent: HomePageContent = {
 
   featuredProjects: {
     headline: 'Featured Projects',
-    projects: [
-      {
-        id: 'project-1',
-        slug: 'biratnagar-city-center',
-        title: 'Biratnagar City Center',
-        clientType: 'commercial',
-        location: 'Biratnagar',
-        scope: 'Commercial Complex',
-        highlights: ['50,000 sq ft', 'LEED Certified', 'Modern Design'],
-        images: {
-          thumbnail: '/images/projects/city-center-thumb.jpg',
-          featured: '/images/projects/city-center-featured.jpg',
-          gallery: [],
-        },
-        seo: {
-          title: 'Biratnagar City Center | KNS Projects',
-          description: 'A landmark commercial complex in the heart of Biratnagar.',
-        },
-      },
-      {
-        id: 'project-2',
-        slug: 'province-hospital',
-        title: 'Province General Hospital',
-        clientType: 'government',
-        location: 'Dharan',
-        scope: 'Healthcare Facility',
-        highlights: ['200 Beds', 'Emergency Wing', 'Modern Equipment'],
-        images: {
-          thumbnail: '/images/projects/hospital-thumb.jpg',
-          featured: '/images/projects/hospital-featured.jpg',
-          gallery: [],
-        },
-        seo: {
-          title: 'Province General Hospital | KNS Projects',
-          description: 'State-of-the-art healthcare facility serving the eastern region.',
-        },
-      },
-      {
-        id: 'project-3',
-        slug: 'industrial-park',
-        title: 'Eastern Industrial Park',
-        clientType: 'commercial',
-        location: 'Biratnagar',
-        scope: 'Industrial Complex',
-        highlights: ['100 Acres', 'Modern Infrastructure', 'Sustainable Design'],
-        images: {
-          thumbnail: '/images/projects/industrial-thumb.jpg',
-          featured: '/images/projects/industrial-featured.jpg',
-          gallery: [],
-        },
-        seo: {
-          title: 'Eastern Industrial Park | KNS Projects',
-          description: 'A modern industrial complex driving economic growth in eastern Nepal.',
-        },
-      },
-    ],
+    categories: projectCategories,
+    projects: allProjects,
   },
 
   coverage: {
@@ -321,7 +268,7 @@ export const homePageContent: HomePageContent = {
     subtitle: 'Join Our Team',
     description:
       'Be part of a team that is shaping the future of construction in Nepal. We offer competitive compensation, professional development opportunities, and a culture that values innovation and excellence.',
-    image: '/images/projects/project-2.jpg',
+    image: '/images/projects/legacy/project-22.jpg',
     primaryCta: {
       text: 'View Open Positions',
       href: '/careers',

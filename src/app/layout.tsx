@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   },
   description: "Leading construction contractor in Biratnagar, Nepal with 30 years of experience in commercial and government construction projects.",
   keywords: ["construction company nepal", "biratnagar contractor", "commercial construction", "government construction"],
+  icons: {
+    icon: '/images/favicon.png',
+  },
 };
 
 export default function RootLayout({

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GridLines } from '@/components/ui/GridLines';
@@ -10,11 +10,65 @@ import type { Project } from '@/types/content';
 
 interface ProjectsSectionProps {
   headline: string;
+  categories: string[];
   projects: Project[];
+  limit?: number;
 }
 
-export function ProjectsSection({ headline, projects }: ProjectsSectionProps) {
-  const [featuredProject, ...otherProjects] = projects;
+function SearchIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+  );
+}
+
+function SlidersIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="4" y1="21" x2="4" y2="14" />
+      <line x1="4" y1="10" x2="4" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="12" />
+      <line x1="12" y1="8" x2="12" y2="3" />
+      <line x1="20" y1="21" x2="20" y2="16" />
+      <line x1="20" y1="12" x2="20" y2="3" />
+      <line x1="1" y1="14" x2="7" y2="14" />
+      <line x1="9" y1="8" x2="15" y2="8" />
+      <line x1="17" y1="16" x2="23" y2="16" />
+    </svg>
+  );
+}
+
+export function ProjectsSection({ headline, categories, projects, limit }: ProjectsSectionProps) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  const filteredProjects = useMemo(() => {
+    let result = projects;
+
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter((p) => p.title.toLowerCase().includes(query));
+    }
+
+    if (selectedCategories.length > 0) {
+      result = result.filter((p) => selectedCategories.includes(p.category));
+    }
+
+    if (limit) {
+      result = result.slice(0, limit);
+    }
+
+    return result;
+  }, [projects, searchQuery, selectedCategories, limit]);
+
+  const toggleCategory = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
+    );
+  };
 
   return (
     <section className="projects-section">
@@ -23,62 +77,90 @@ export function ProjectsSection({ headline, projects }: ProjectsSectionProps) {
       <div className="wrapper prel" style={{ zIndex: 10 }}>
         {/* Header */}
         <AnimatedElement>
-          <h2 className="title fs-70 mb-12">{headline}</h2>
+          <h2 className="title fs-45 mb-12">{headline}</h2>
         </AnimatedElement>
 
-        {/* Projects Grid */}
-        <div className="projects-grid">
-          {/* Featured Project (Left) */}
-          {featuredProject && (
-            <div className="project-featured">
-              <AnimatedElement direction="left">
-                <Link href={`/projects/${featuredProject.slug}`} className="project-card">
-                  <div className="project-image">
-                    <Image
-                      src={featuredProject.images.featured}
-                      alt={featuredProject.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <h3 className="project-title fs-40">{featuredProject.title}</h3>
-                  <p className="project-meta">
-                    {featuredProject.location} &bull; {featuredProject.scope}
-                  </p>
-                  <span className="btn-link mt-4 inline-flex">
-                    View Project <ArrowRight />
-                  </span>
-                </Link>
-              </AnimatedElement>
+        {/* Search/Filter Toolbar */}
+        <div style={{ position: 'relative', zIndex: 20 }}>
+        <AnimatedElement delay={0.1}>
+          <div className="projects-toolbar">
+            {/* Search (left) */}
+            <div className="projects-search">
+              <SearchIcon />
+              <input
+                type="text"
+                placeholder="Find A Project"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="projects-search-input"
+              />
             </div>
-          )}
 
-          {/* Other Projects (Right) */}
-          <div className="projects-list">
-            {otherProjects.map((project, index) => (
-              <AnimatedElement key={project.id} delay={index * 0.1}>
-                <Link href={`/projects/${project.slug}`} className="project-card">
-                  <div className="project-image">
-                    <Image
-                      src={project.images.thumbnail}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <h4 className="project-title fs-30">{project.title}</h4>
-                  <p className="project-meta">{project.location}</p>
-                </Link>
-              </AnimatedElement>
-            ))}
+            {/* Vertical divider */}
+            <div className="projects-toolbar-divider" />
+
+            {/* Refine (right) */}
+            <div className="projects-filter-wrapper">
+              <button
+                className="projects-filter-toggle"
+                onClick={() => setFilterOpen(!filterOpen)}
+                aria-expanded={filterOpen}
+              >
+                <SlidersIcon />
+                <span>Refine your search</span>
+              </button>
+
+              {filterOpen && (
+                <div className="projects-filter-dropdown">
+                  {categories.map((category) => (
+                    <label key={category} className="projects-filter-option">
+                      <input
+                        type="checkbox"
+                        checked={selectedCategories.includes(category)}
+                        onChange={() => toggleCategory(category)}
+                      />
+                      <span>{category}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
+        </AnimatedElement>
         </div>
 
-        {/* View All Link */}
+        {/* 4-Column Project Grid */}
+        <div className="projects-uniform-grid">
+          {filteredProjects.map((project, index) => (
+            <AnimatedElement key={project.id} delay={index * 0.05}>
+              <Link href={`/projects/${project.slug}`} className="project-card">
+                <span className="project-category">{project.category}</span>
+                <div className="project-image">
+                  <Image
+                    src={project.images.thumbnail}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <p className="project-location">{project.location}</p>
+                <h3 className="project-title">{project.title}</h3>
+              </Link>
+            </AnimatedElement>
+          ))}
+        </div>
+
+        {filteredProjects.length === 0 && (
+          <p style={{ textAlign: 'center', color: 'var(--color-gray-500)', padding: '3rem 0' }}>
+            No projects found matching your criteria.
+          </p>
+        )}
+
+        {/* See All Projects Link */}
         <AnimatedElement delay={0.4}>
-          <div className="mt-12">
+          <div className="projects-see-all">
             <Link href="/projects" className="btn-link">
-              View All Projects <ArrowRight />
+              See All Projects <ArrowRight />
             </Link>
           </div>
         </AnimatedElement>

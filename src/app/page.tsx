@@ -37,7 +37,9 @@ export default function HomePage() {
       {/* 6. Featured Projects */}
       <ProjectsSection
         headline={content.featuredProjects.headline}
+        categories={content.featuredProjects.categories}
         projects={content.featuredProjects.projects}
+        limit={8}
       />
 
       {/* 7. Location / Coverage (parallax) */}

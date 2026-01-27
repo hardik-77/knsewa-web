@@ -80,50 +80,66 @@ export function TwoColumnSection({ content, variant = 'light' }: TwoColumnSectio
             <AnimatedElement direction={imagePosition === 'left' ? 'right' : 'left'}>
               <p
                 className="section-label"
-                style={{ color: isDark ? 'rgba(255,255,255,0.5)' : 'var(--color-gray-500)' }}
+                style={{ color: isDark ? 'rgba(255,255,255,0.5)' : 'var(--color-accent)' }}
               >
                 {content.label}
               </p>
             </AnimatedElement>
             <AnimatedElement delay={0.1}>
               <h2
-                className="title fs-70 mb-6"
-                style={{ color: isDark ? 'var(--color-white)' : 'var(--color-primary)' }}
+                className="title fs-45"
+                style={{
+                  color: isDark ? 'var(--color-white)' : 'var(--color-primary)',
+                  marginBottom: '2rem',
+                }}
               >
                 {content.headline}
               </h2>
             </AnimatedElement>
             <AnimatedElement delay={0.2}>
               <p
-                className="para fs-32 mb-8"
-                style={{ color: isDark ? 'rgba(255,255,255,0.7)' : 'var(--color-gray-500)' }}
+                className="para fs-19"
+                style={{
+                  color: isDark ? 'rgba(255,255,255,0.7)' : 'var(--color-gray-500)',
+                  lineHeight: 1.6,
+                }}
               >
                 {content.description}
               </p>
             </AnimatedElement>
-
-            <AnimatedElement delay={0.3}>
-              <div className="flex flex-col sm:flex-row gap-6 items-start">
-                {content.cta && (
-                  <Link href={content.cta.href} className={`btn-link ${isDark ? 'white' : ''}`}>
-                    {content.cta.text} <ArrowRight />
-                  </Link>
-                )}
-                {content.secondaryLink && (
-                  <Link
-                    href={content.secondaryLink.href}
-                    className="text-base font-medium underline underline-offset-4 transition-colors"
-                    style={{
-                      color: isDark ? 'rgba(255,255,255,0.6)' : 'var(--color-gray-500)',
-                    }}
-                  >
-                    {content.secondaryLink.text}
-                  </Link>
-                )}
-              </div>
-            </AnimatedElement>
           </div>
         </div>
+
+        {/* CTA Bar */}
+        {(content.cta || content.secondaryLink) && (
+          <AnimatedElement delay={0.3}>
+            <div className="two-col-cta-bar" style={{
+              borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'var(--color-gray-200)',
+            }}>
+              {content.cta && (
+                <Link href={content.cta.href} className={`two-col-cta-primary ${isDark ? 'white' : ''}`}>
+                  {content.cta.text} <ArrowRight />
+                </Link>
+              )}
+              {content.cta && content.secondaryLink && (
+                <div className="two-col-cta-divider" style={{
+                  backgroundColor: isDark ? 'rgba(255,255,255,0.1)' : 'var(--color-gray-200)',
+                }} />
+              )}
+              {content.secondaryLink && (
+                <Link
+                  href={content.secondaryLink.href}
+                  className="two-col-cta-secondary"
+                  style={{
+                    color: isDark ? 'rgba(255,255,255,0.6)' : 'var(--color-gray-500)',
+                  }}
+                >
+                  {content.secondaryLink.text}
+                </Link>
+              )}
+            </div>
+          </AnimatedElement>
+        )}
       </div>
     </section>
   );

@@ -514,25 +514,29 @@ Horizontal cards are no longer used.
 Use vertical cards (image on top) for all news layouts.
 ```
 
-#### Project Card
+#### Project Card (Uniform Grid)
 ```
 ┌─────────────────────────┐
+│ CATEGORY                │  ← 12px, uppercase, gray-500, letter-spacing 0.1em
 │                         │
-│        [IMAGE]          │  ← aspect-ratio: 4/3 or 16/10
+│        [IMAGE]          │  ← aspect-ratio: 16/10, rounded-lg, hover scale
 │                         │
 ├─────────────────────────┤
-│ PROJECT TITLE           │  ← 24px, medium
-│                         │
-│ Location • Scope        │  ← 14px, gray-500
+│ Location                │  ← 14px, gray-500
+│ Project Title           │  ← 18px (1.125rem), medium, primary
 └─────────────────────────┘
 
 Specs:
-- Image aspect ratio: 4:3 or 16:10
-- Card padding: 0 (image bleeds)
-- Text padding: 0 (below image)
-- Gap image to category: 16px
-- Gap category to title: 8px
-- Gap title to link: 16px
+- Category: 12px, uppercase, font-weight 500, gray-500, letter-spacing 0.1em
+- Category margin-bottom: 8px
+- Image aspect ratio: 16:10
+- Image border-radius: 12px (radius-lg)
+- Image margin-bottom: 12px
+- Location: 14px, gray-500, margin-bottom 4px
+- Title: 18px (1.125rem), font-weight 500, primary
+- Hover: scale image 1.05, title turns accent
+- Grid: 4 columns desktop, 2 columns tablet, 1 column mobile
+- Grid gap: 32px (2rem)
 ```
 
 #### News Card (Featured - large)
@@ -886,6 +890,7 @@ p-18, p-22, p-30, p-34, p-38 (and m-, gap- variants)
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.2.0 | Jan 27, 2026 | Projects section: uniform 4-column grid, search/filter toolbar, category labels, 18px title |
 | 1.1.0 | Jan 26, 2026 | Updated Featured Card: rounded corners, shadow, font-normal title, 24px spacing |
 | 1.0.0 | Jan 25, 2026 | Initial style guide created |
 

@@ -63,17 +63,34 @@ export function ServicesSection({ headline, description, services }: ServicesSec
         {/* Header */}
         <div className="services-header">
           <AnimatedElement>
-            <h2 className="title fs-90 mb-6">{headline}</h2>
+            <h2
+              className="font-light"
+              style={{
+                fontSize: 'clamp(2rem, 3vw, 2.8125rem)',
+                lineHeight: '1.1',
+                letterSpacing: '-0.01em',
+                color: 'var(--color-primary)',
+              }}
+            >
+              {headline}
+            </h2>
           </AnimatedElement>
           <AnimatedElement delay={0.1}>
-            <p className="para fs-32" style={{ color: 'var(--color-gray-500)' }}>
+            <p
+              className="mt-6"
+              style={{
+                fontSize: 'clamp(1rem, 1.2vw, 1.1875rem)',
+                lineHeight: '1.6',
+                color: 'var(--color-gray-500)',
+              }}
+            >
               {description}
             </p>
           </AnimatedElement>
         </div>
 
-        {/* Services Grid */}
-        <div className="services-grid">
+        {/* Desktop: Services Grid (nav + detail) */}
+        <div className="services-grid services-desktop">
           {/* Left - Service List with Progress Indicator */}
           <nav className="services-nav">
             <AnimatedElement direction="left">
@@ -83,40 +100,40 @@ export function ServicesSection({ headline, description, services }: ServicesSec
                   onClick={() => setActiveIndex(index)}
                   className={`service-nav-item ${activeIndex === index ? 'active' : ''}`}
                 >
+                  <span className="service-indicator" />
                   <span className="service-index">{service.index}</span>
                   <span className="service-nav-title">{service.shortTitle}</span>
-                  {/* Progress indicator */}
-                  {activeIndex === index && (
-                    <span className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--color-accent)]" />
-                  )}
                 </button>
               ))}
             </AnimatedElement>
-
-            {/* Mobile progress dots */}
-            <div className="flex gap-2 mt-6 lg:hidden">
-              {services.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    activeIndex === index ? 'bg-[var(--color-accent)]' : 'bg-[var(--color-gray-300)]'
-                  }`}
-                  aria-label={`Go to service ${index + 1}`}
-                />
-              ))}
-            </div>
           </nav>
 
           {/* Right - Active Service Detail */}
           <div className="services-content">
-            {/* Text Content */}
             <div ref={contentRef} className="services-text">
-              <p className="section-label" style={{ color: 'var(--color-gray-500)' }}>
+              <p className="section-label" style={{ color: 'var(--color-gray-500)', marginBottom: '1.25rem' }}>
                 {activeService.title}
               </p>
-              <h3 className="title fs-70 mb-6">{activeService.title}</h3>
-              <p className="para fs-23 mb-8" style={{ color: 'var(--color-gray-500)' }}>
+              <h3
+                className="font-light"
+                style={{
+                  fontSize: 'clamp(1.75rem, 2.5vw, 2.5rem)',
+                  lineHeight: '1.1',
+                  letterSpacing: '-0.01em',
+                  color: 'var(--color-primary)',
+                  marginBottom: '2rem',
+                }}
+              >
+                {activeService.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: 'clamp(0.875rem, 1vw, 1rem)',
+                  lineHeight: '1.6',
+                  color: 'var(--color-gray-500)',
+                  marginBottom: '3rem',
+                }}
+              >
                 {activeService.description}
               </p>
               <Link href={activeService.href} className="btn-link group">
@@ -125,7 +142,6 @@ export function ServicesSection({ headline, description, services }: ServicesSec
               </Link>
             </div>
 
-            {/* Image */}
             <div className="services-image">
               <div ref={imageRef} className="services-image-wrapper">
                 <Image
@@ -137,6 +153,25 @@ export function ServicesSection({ headline, description, services }: ServicesSec
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Mobile: Horizontal scrollable cards */}
+        <div className="services-mobile-scroll">
+          {services.map((service) => (
+            <Link key={service.id} href={service.href} className="services-mobile-card">
+              <div className="services-mobile-card-image">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="services-mobile-card-label">
+                <span>{service.shortTitle}</span>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

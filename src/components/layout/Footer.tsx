@@ -37,7 +37,7 @@ export function Footer({ settings, navigation }: FooterProps) {
           {/* Logo & Contact Info Column */}
           <div className="footer-brand">
             <Link href="/" className="footer-logo-large">
-              <span className="font-display text-5xl lg:text-6xl text-white">KNS</span>
+              <img src="/images/khusbhu-logo.png" alt="Khushbu Nirman Sewa" className="footer-logo-img" />
             </Link>
             <p className="footer-tagline mt-4">{settings.tagline}</p>
 
@@ -183,20 +183,24 @@ export function Footer({ settings, navigation }: FooterProps) {
 
         {/* Bottom Bar */}
         <div className="footer-bottom">
-          <p className="footer-copyright">
-            &copy; {currentYear} {settings.name}. All rights reserved.
-          </p>
-          <div className="footer-legal">
-            <Link href="/privacy" className="footer-legal-link">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="footer-legal-link">
-              Terms of Service
-            </Link>
-            <Link href="/accessibility" className="footer-legal-link">
-              Accessibility
-            </Link>
+          <div className="footer-bottom-left">
+            <p className="footer-copyright">
+              &copy; {currentYear} {settings.name}. All rights reserved.
+            </p>
+            <span className="footer-bottom-divider" />
+            <a
+              href="https://zunkireelabs.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-developed-by"
+            >
+              Developed by
+              <img src="/images/zunkireelabs-logo.png" alt="Zunkireelabs" className="footer-zl-logo" />
+            </a>
           </div>
+          <p className="footer-bottom-right">
+            Premium Construction Contractor in Biratnagar, Nepal
+          </p>
         </div>
       </div>
     </footer>

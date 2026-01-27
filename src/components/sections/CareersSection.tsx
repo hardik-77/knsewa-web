@@ -71,7 +71,7 @@ export function CareersSection({ content }: CareersSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="careers-section relative min-h-[80vh] flex items-center overflow-hidden"
+      className="careers-section relative min-h-[60vh] lg:min-h-[80vh] flex items-center overflow-hidden"
     >
       {/* Parallax Background */}
       <div ref={containerRef as React.RefObject<HTMLDivElement>} className="absolute inset-0 z-0">
@@ -88,45 +88,43 @@ export function CareersSection({ content }: CareersSectionProps) {
       {/* Content */}
       <div className="wrapper prel z-10 py-20 lg:py-32">
         <div ref={contentRef} className="max-w-2xl">
-          <span className="section-label text-[var(--color-accent)]">{content.subtitle}</span>
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-light text-white mt-4 mb-6">
+          <span className="section-label" style={{ color: 'var(--color-accent)' }}>{content.subtitle}</span>
+          <h2 className="title fs-45 text-white" style={{ marginTop: '0.5rem', marginBottom: '1.5rem' }}>
             {content.title}
           </h2>
-          <p className="text-white/70 text-lg lg:text-xl mb-8 leading-relaxed">
+          <p className="fs-16" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, marginBottom: '2rem' }}>
             {content.description}
           </p>
 
           {/* Stats */}
           {content.stats && content.stats.length > 0 && (
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-6" style={{ marginBottom: '2rem' }}>
               {content.stats.map((stat, index) => (
                 <div key={index}>
-                  <span className="text-3xl lg:text-4xl font-light text-[var(--color-accent)]">
+                  <span className="fs-45 font-light" style={{ color: 'var(--color-accent)' }}>
                     {stat.value}
                   </span>
-                  <p className="text-white/60 mt-1">{stat.label}</p>
+                  <p className="fs-16" style={{ color: 'rgba(255,255,255,0.5)', marginTop: '0.25rem' }}>{stat.label}</p>
                 </div>
               ))}
             </div>
           )}
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-6">
             <Link
               href={content.primaryCta.href}
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-[var(--color-accent)] text-white font-medium hover:bg-[var(--color-accent-hover)] transition-colors"
+              className="btn-link white"
             >
-              {content.primaryCta.text}
-              <ArrowIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              {content.primaryCta.text} <ArrowIcon className="w-4 h-4" />
             </Link>
 
             {content.secondaryCta && (
               <Link
                 href={content.secondaryCta.href}
-                className="group inline-flex items-center gap-3 px-8 py-4 border border-white/30 text-white font-medium hover:bg-white/10 transition-colors"
+                className="btn-link white"
               >
-                {content.secondaryCta.text}
-                <ArrowIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                {content.secondaryCta.text} <ArrowIcon className="w-4 h-4" />
               </Link>
             )}
           </div>
@@ -142,7 +140,7 @@ export const defaultCareersContent: CareersContent = {
   subtitle: 'Join Our Team',
   description:
     'Be part of a team that is shaping the future of construction in Nepal. We offer competitive compensation, professional development opportunities, and a culture that values innovation and excellence.',
-  image: '/images/projects/project-2.jpg',
+  image: '/images/projects/legacy/project-22.jpg',
   primaryCta: {
     text: 'View Open Positions',
     href: '/careers',

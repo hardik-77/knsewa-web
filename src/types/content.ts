@@ -92,6 +92,7 @@ export interface Project {
   id: string;
   slug: string;
   title: string;
+  category: string;
   clientType: 'government' | 'commercial' | 'institutional';
   location: string;
   scope: string;
@@ -242,6 +243,7 @@ export interface HomePageContent {
   };
   featuredProjects: {
     headline: string;
+    categories: string[];
     projects: Project[];
   };
   coverage: TwoColumnContent;

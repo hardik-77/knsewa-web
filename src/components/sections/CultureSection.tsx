@@ -82,35 +82,33 @@ export function CultureSection({
     <section ref={sectionRef} className="culture-section bg-[var(--color-primary)] py-20 lg:py-32">
       <div ref={contentRef} className="wrapper">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-12 lg:mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between" style={{ marginBottom: '3rem' }}>
           <div>
             <span className="section-label text-[var(--color-accent)]">{subtitle}</span>
-            <h2 className="text-4xl lg:text-5xl font-light text-white mt-2">{title}</h2>
+            <h2 className="title fs-45 text-white mt-2">{title}</h2>
           </div>
 
           {/* Dropdown Selector */}
-          <div className="relative mt-6 lg:mt-0">
+          <div className="relative mt-6 lg:mt-0" style={{ zIndex: 30 }}>
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center justify-between gap-4 px-6 py-4 bg-white/10 text-white min-w-[280px] hover:bg-white/20 transition-colors"
+              className="culture-dropdown-toggle"
             >
-              <span className="font-medium">{activeCommitment.title}</span>
+              <span>{activeCommitment.title}</span>
               <ChevronDownIcon
-                className={`w-5 h-5 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
+                className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
               />
             </button>
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-white shadow-xl z-20">
+              <div className="culture-dropdown-menu">
                 {commitments.map((commitment, index) => (
                   <button
                     key={commitment.id}
                     onClick={() => handleCommitmentChange(commitment, index)}
-                    className={`block w-full text-left px-6 py-4 hover:bg-[var(--color-gray-100)] transition-colors ${
-                      activeCommitment.id === commitment.id
-                        ? 'text-[var(--color-accent)] bg-[var(--color-gray-100)]'
-                        : 'text-[var(--color-primary)]'
+                    className={`culture-dropdown-item ${
+                      activeCommitment.id === commitment.id ? 'active' : ''
                     }`}
                   >
                     {commitment.title}
@@ -133,9 +131,9 @@ export function CultureSection({
         >
           {commitments.map((commitment) => (
             <SwiperSlide key={commitment.id}>
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+              <div className="grid lg:grid-cols-2 items-center" style={{ gap: 'clamp(2rem, 5vw, 5rem)' }}>
                 {/* Image */}
-                <div className="relative aspect-[4/3] lg:aspect-[3/2] overflow-hidden rounded-lg">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                   <Image
                     src={commitment.image}
                     alt={commitment.title}
@@ -146,21 +144,21 @@ export function CultureSection({
 
                 {/* Content */}
                 <div className="text-white">
-                  <h3 className="text-3xl lg:text-4xl font-light mb-6">{commitment.title}</h3>
-                  <p className="text-white/70 text-lg mb-8 leading-relaxed">
+                  <h3 className="fs-30 font-medium" style={{ lineHeight: 1.2, marginBottom: '1.5rem' }}>{commitment.title}</h3>
+                  <p className="fs-16" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, marginBottom: '2rem' }}>
                     {commitment.description}
                   </p>
 
                   {commitment.stats && (
-                    <div className="mb-8">
-                      <span className="text-5xl lg:text-6xl font-light text-[var(--color-accent)]">
+                    <div style={{ marginBottom: '2rem' }}>
+                      <span className="fs-45 font-light text-[var(--color-accent)]" style={{ lineHeight: 1.1, display: 'block' }}>
                         {commitment.stats.value}
                       </span>
-                      <p className="text-white/60 mt-2">{commitment.stats.label}</p>
+                      <p className="fs-16" style={{ color: 'rgba(255,255,255,0.5)', marginTop: '0.5rem' }}>{commitment.stats.label}</p>
                     </div>
                   )}
 
-                  <button className="inline-flex items-center gap-2 text-white font-medium hover:text-[var(--color-accent)] transition-colors">
+                  <button className="btn-link white">
                     Learn More
                     <ArrowIcon className="w-4 h-4" />
                   </button>

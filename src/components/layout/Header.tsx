@@ -110,11 +110,11 @@ export function Header({ settings, navigation }: HeaderProps) {
         <div className="header-holder">
           {/* Logo */}
           <Link href="/" className="header-logo">
-            KNS
+            <img src="/images/khusbhu-logo.png" alt="Khushbu Nirman Sewa" className="header-logo-img" />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="header-nav hidden lg:flex items-stretch h-full">
+          <nav className="header-nav hidden xl:flex items-stretch h-full">
             {navigation.map((item) => {
               const isActive = item.href === '/services' && activeMegaMenu === 'services';
               const isServices = item.href === '/services';
@@ -143,7 +143,7 @@ export function Header({ settings, navigation }: HeaderProps) {
           </nav>
 
           {/* Right Actions */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden xl:flex items-center gap-4">
             {/* Search Button */}
             <button
               onClick={() => setIsSearchOpen(true)}
@@ -169,7 +169,7 @@ export function Header({ settings, navigation }: HeaderProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden p-2 ${
+            className={`xl:hidden p-2 ${
               isScrolled || isMobileMenuOpen ? 'text-[var(--color-primary)]' : 'text-white'
             }`}
             aria-label="Toggle menu"
@@ -199,11 +199,11 @@ export function Header({ settings, navigation }: HeaderProps) {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 bg-white transform transition-transform duration-500 lg:hidden ${
+        className={`fixed inset-0 z-40 bg-white transform transition-transform duration-500 xl:hidden ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex flex-col h-full pt-24 px-8 pb-8">
+        <div className="flex flex-col h-full pt-20 px-6 pb-6 overflow-y-auto">
           {/* Search in Mobile */}
           <div className="mb-6">
             <button
