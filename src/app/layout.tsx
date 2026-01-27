@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { AnimationProvider } from "@/providers/AnimationProvider";
 import { getSiteSettings, getMainNavigation, getFooterNavigation } from "@/data/adapters/content.adapter";
 
 const siteSettings = getSiteSettings();
@@ -26,9 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header settings={siteSettings} navigation={mainNav} />
-        <main>{children}</main>
-        <Footer settings={siteSettings} navigation={footerNav} />
+        <AnimationProvider>
+          <Header settings={siteSettings} navigation={mainNav} />
+          <main>{children}</main>
+          <Footer settings={siteSettings} navigation={footerNav} />
+        </AnimationProvider>
       </body>
     </html>
   );

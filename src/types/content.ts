@@ -33,6 +33,30 @@ export interface NavItem {
   children?: NavItem[];
 }
 
+// Mega Menu
+export interface MegaMenuItem {
+  label: string;
+  href: string;
+  description?: string;
+}
+
+export interface MegaMenuColumn {
+  title: string;
+  items: MegaMenuItem[];
+}
+
+export interface MegaMenuFeatured {
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+}
+
+export interface MegaMenuContent {
+  columns: MegaMenuColumn[];
+  featured?: MegaMenuFeatured;
+}
+
 // Hero Section
 export interface HeroContent {
   headline: string;
@@ -42,6 +66,7 @@ export interface HeroContent {
     href: string;
   };
   backgroundImage?: string;
+  backgroundVideo?: string;
 }
 
 // Stats
@@ -91,7 +116,7 @@ export interface Location {
   seo: SEOData;
 }
 
-// Blog / Insights
+// Blog / Insights / News
 export interface BlogPost {
   id: string;
   slug: string;
@@ -103,6 +128,16 @@ export interface BlogPost {
   category: string;
   image: string;
   seo: SEOData;
+}
+
+export interface NewsArticle {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  image: string;
+  publishDate: string;
+  slug: string;
 }
 
 // CTA Section
@@ -118,6 +153,61 @@ export interface CTAContent {
     text: string;
     href: string;
   };
+}
+
+// CTA Popup Card
+export interface CTAPopupCard {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  image: string;
+  cta: {
+    text: string;
+    href: string;
+  };
+}
+
+// Culture Commitment
+export interface CultureCommitment {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  stats?: {
+    value: string;
+    label: string;
+  };
+}
+
+// Careers Section
+export interface CareersContent {
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  primaryCta: {
+    text: string;
+    href: string;
+  };
+  secondaryCta?: {
+    text: string;
+    href: string;
+  };
+  stats?: {
+    value: string;
+    label: string;
+  }[];
+}
+
+// Specialization
+export interface Specialization {
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  image: string;
+  href: string;
 }
 
 // Two Column Section (Image + Text)
@@ -142,7 +232,9 @@ export interface TwoColumnContent {
 export interface HomePageContent {
   seo: SEOData;
   hero: HeroContent;
+  ctaPopup: CTAPopupCard[];
   stats: Stat[];
+  news: NewsArticle[];
   services: {
     headline: string;
     description: string;
@@ -153,6 +245,9 @@ export interface HomePageContent {
     projects: Project[];
   };
   coverage: TwoColumnContent;
+  culture: CultureCommitment[];
+  careers: CareersContent;
+  specializations: Specialization[];
   whyChooseUs: TwoColumnContent;
   cta: CTAContent;
 }

@@ -109,6 +109,29 @@ Co-Authored-By: {user.name} <{user.email}>
 
 ---
 
+## Style Guide
+
+**IMPORTANT:** Always refer to the style guide before styling any component.
+
+📄 **Location:** `/docs/STYLE-GUIDE.md`
+
+### Workflow for Styling Changes
+1. **Check style guide first** - Find current values for typography, spacing, colors
+2. **Make the change** - Update component/CSS
+3. **Update style guide** - Keep it in sync with actual code
+4. **Confirm** - "Style guide updated ✓"
+
+### Quick Reference
+| Element | Size | Weight | Line Height |
+|---------|------|--------|-------------|
+| Section Label | 16px | 500 | 1.5 |
+| Section Title (H2) | 45px | 300 | 1.1 |
+| Card Title | 24px | 500 | 1.2 |
+| Body Text | 16px | 400 | 1.6 |
+| Link/CTA | 16px | 500 | 1.5 |
+
+---
+
 ## Critical Notes
 
 1. **Static Export** - No SSR, no API routes, no dynamic routes without `generateStaticParams()`
@@ -116,6 +139,7 @@ Co-Authored-By: {user.name} <{user.email}>
 3. **Port 3010** - Configured in `.env.local`, avoid conflicts
 4. **Deploy builds first** - `deploy.sh` runs `npm run build` → Docker build → deploy
 5. **Traefik handles SSL** - Don't expose ports directly, use `hosting` network
+6. **Style Guide** - Always check `/docs/STYLE-GUIDE.md` before styling changes
 
 ---
 

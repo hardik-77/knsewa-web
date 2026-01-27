@@ -1,68 +1,93 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { GridLines } from '@/components/ui/GridLines';
 import type { Stat } from '@/types/content';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface StatsSectionProps {
   stats: Stat[];
 }
 
 function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: string }) {
-  const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const numericValue = parseInt(value, 10);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true);
-        }
+    const element = ref.current;
+    if (!element) return;
+
+    const counter = { value: 0 };
+
+    ScrollTrigger.create({
+      trigger: element,
+      start: 'top 80%',
+      onEnter: () => {
+        gsap.to(counter, {
+          value: numericValue,
+          duration: 2,
+          ease: 'power2.out',
+          onUpdate: () => {
+            element.textContent = `${Math.round(counter.value)}${suffix}`;
+          },
+        });
       },
-      { threshold: 0.5 }
-    );
+      once: true,
+    });
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [isVisible]);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const duration = 2000;
-    const steps = 60;
-    const increment = numericValue / steps;
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= numericValue) {
-        setCount(numericValue);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, duration / steps);
-
-    return () => clearInterval(timer);
-  }, [isVisible, numericValue]);
+    return () => {
+      ScrollTrigger.getAll()
+        .filter((t) => t.trigger === element)
+        .forEach((t) => t.kill());
+    };
+  }, [numericValue, suffix]);
 
   return (
     <span ref={ref} className="tabular-nums">
-      {count}
-      {suffix}
+      0{suffix}
     </span>
   );
 }
 
 export function StatsSection({ stats }: StatsSectionProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const items = section.querySelectorAll('.stat-item');
+
+    gsap.fromTo(
+      items,
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%',
+        },
+      }
+    );
+
+    return () => {
+      ScrollTrigger.getAll()
+        .filter((t) => t.trigger === section)
+        .forEach((t) => t.kill());
+    };
+  }, []);
+
   return (
-    <section className="stats-section">
+    <section ref={sectionRef} className="stats-section">
       <GridLines variant="light" />
 
       <div className="wrapper prel" style={{ zIndex: 10 }}>

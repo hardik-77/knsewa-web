@@ -1,9 +1,13 @@
-import { getHomePage, getSiteSettings } from "@/data/adapters/content.adapter";
+import { getHomePage } from "@/data/adapters/content.adapter";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StatsSection } from "@/components/sections/StatsSection";
+import { NewsInsightsSection } from "@/components/sections/NewsInsightsSection";
+import { SpecializationsSection } from "@/components/sections/SpecializationsSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { TwoColumnSection } from "@/components/sections/TwoColumnSection";
+import { CultureSection } from "@/components/sections/CultureSection";
+import { CareersSection } from "@/components/sections/CareersSection";
 import { CTASection } from "@/components/sections/CTASection";
 
 export default function HomePage() {
@@ -11,32 +15,41 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero Section */}
+      {/* 1. Hero Section (video support) */}
       <HeroSection content={content.hero} />
 
-      {/* Stats Section */}
+      {/* 2. Stats Section */}
       <StatsSection stats={content.stats} />
 
-      {/* Services Section */}
+      {/* 4. News & Insights (pinned section) */}
+      <NewsInsightsSection articles={content.news} />
+
+      {/* 5. Specializations (horizontal scroll) */}
+      <SpecializationsSection specializations={content.specializations} />
+
+      {/* 6. Services Section */}
       <ServicesSection
         headline={content.services.headline}
         description={content.services.description}
         services={content.services.items}
       />
 
-      {/* Featured Projects */}
+      {/* 6. Featured Projects */}
       <ProjectsSection
         headline={content.featuredProjects.headline}
         projects={content.featuredProjects.projects}
       />
 
-      {/* Coverage Section */}
+      {/* 7. Location / Coverage (parallax) */}
       <TwoColumnSection content={content.coverage} />
 
-      {/* Why Choose Us */}
-      <TwoColumnSection content={content.whyChooseUs} variant="dark" />
+      {/* 8. Culture Slider */}
+      <CultureSection commitments={content.culture} />
 
-      {/* CTA Section */}
+      {/* 9. Careers Section (parallax) */}
+      <CareersSection content={content.careers} />
+
+      {/* 10. Final CTA */}
       <CTASection content={content.cta} />
     </>
   );
