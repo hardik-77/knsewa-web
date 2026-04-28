@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -36,7 +37,6 @@ interface AnimationProviderProps {
 export function AnimationProvider({ children }: AnimationProviderProps) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
   const [isReady, setIsReady] = useState(false);
-  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     // Initialize Lenis smooth scroll
@@ -54,33 +54,52 @@ export function AnimationProvider({ children }: AnimationProviderProps) {
     // Sync Lenis with GSAP ScrollTrigger
     lenisInstance.on('scroll', ScrollTrigger.update);
 
-    // Add Lenis to GSAP ticker
-    gsap.ticker.add((time) => {
+    // Add Lenis to GSAP ticker (single RAF source)
+    const tickerCallback = (time: number) => {
       lenisInstance.raf(time * 1000);
-    });
+    };
+    gsap.ticker.add(tickerCallback);
 
     // Disable GSAP's default lag smoothing
     gsap.ticker.lagSmoothing(0);
-
-    // Animation frame loop
-    function raf(time: number) {
-      lenisInstance.raf(time);
-      rafRef.current = requestAnimationFrame(raf);
-    }
-    rafRef.current = requestAnimationFrame(raf);
 
     // Mark as ready
     setIsReady(true);
 
     // Cleanup
     return () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
+      gsap.ticker.remove(tickerCallback);
       lenisInstance.destroy();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
+
+  // Kill all ScrollTriggers on route change BEFORE React unmounts DOM nodes.
+  // GSAP pin: true reparents elements into spacer divs. React can't find them
+  // during unmount → removeChild error. The cleanup function of useLayoutEffect
+  // runs BEFORE DOM mutations, so we kill ScrollTriggers here to restore the DOM
+  // tree before React tries to remove nodes.
+  const pathname = usePathname();
+  const lenisRef = useRef<Lenis | null>(null);
+  lenisRef.current = lenis;
+
+  useLayoutEffect(() => {
+    // After new route mounts, refresh ScrollTrigger for new page content
+    ScrollTrigger.refresh();
+
+    return () => {
+      // CLEANUP: runs BEFORE next route's DOM mutations
+      // Kill all ScrollTriggers (removes pin spacers, restores DOM tree)
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      gsap.killTweensOf('*');
+
+      // Reset scroll position
+      window.scrollTo(0, 0);
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: true });
+      }
+    };
+  }, [pathname]);
 
   // Refresh ScrollTrigger on resize
   useEffect(() => {

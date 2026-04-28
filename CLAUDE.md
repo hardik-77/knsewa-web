@@ -19,15 +19,39 @@
 ## Commands
 
 ```bash
-# Development (port 3010)
-npm run dev
-
 # Build static site (outputs to /out)
 npm run build
 
-# Deploy
-./deploy.sh dev    # Development
-./deploy.sh prod   # Production (confirms first)
+# Lint
+npm run lint
+```
+
+---
+
+## Deployment
+
+### VPS Server (Production/Staging)
+On the VPS, always deploy to the dev URL first for testing:
+
+```bash
+# Deploy to development (https://knsewa-dev.zunkireelabs.com)
+./deploy.sh dev
+
+# Deploy to production (https://knsewa.com) - confirms before deploying
+./deploy.sh prod
+```
+
+**How it works:**
+- Traefik handles SSL and routing by hostname
+- Containers connect to `hosting` network (no port exposure needed)
+- deploy.sh builds Next.js → Docker → restarts container
+
+### Local Development
+For local development on your machine:
+
+```bash
+# Run dev server on localhost:3010
+npm run dev
 ```
 
 ---
@@ -136,9 +160,9 @@ Co-Authored-By: {user.name} <{user.email}>
 
 1. **Static Export** - No SSR, no API routes, no dynamic routes without `generateStaticParams()`
 2. **Images unoptimized** - Next.js image optimization disabled
-3. **Port 3010** - Configured in `.env.local`, avoid conflicts
-4. **Deploy builds first** - `deploy.sh` runs `npm run build` → Docker build → deploy
-5. **Traefik handles SSL** - Don't expose ports directly, use `hosting` network
+3. **Port 3010** - Local dev only (`npm run dev`), not used on VPS
+4. **VPS Deployment** - Always use `./deploy.sh dev` on VPS, never manually expose ports
+5. **Traefik handles SSL** - On VPS, containers use `hosting` network, Traefik routes by hostname
 6. **Style Guide** - Always check `/docs/STYLE-GUIDE.md` before styling changes
 
 ---

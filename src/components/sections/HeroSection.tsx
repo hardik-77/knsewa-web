@@ -76,7 +76,7 @@ export function HeroSection({ content }: HeroSectionProps) {
 
   return (
     <section className="hero-section">
-      {/* Background - Video or Image */}
+      {/* Background */}
       <div className="hero-bg">
         {hasVideo ? (
           <video
@@ -85,7 +85,7 @@ export function HeroSection({ content }: HeroSectionProps) {
             muted
             loop
             playsInline
-            poster={content.backgroundImage}
+            preload="auto"
             className="w-full h-full object-cover"
           >
             <source src={content.backgroundVideo} type="video/mp4" />
@@ -138,33 +138,6 @@ export function HeroSection({ content }: HeroSectionProps) {
         </div>
       </div>
 
-      <style jsx>{`
-        .scroll-indicator-line {
-          position: relative;
-          height: 48px;
-          width: 1px;
-          background: rgba(255, 255, 255, 0.3);
-        }
-        .scroll-indicator-dot {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 24px;
-          background: white;
-          animation: scrollIndicator 1.5s ease-in-out infinite;
-        }
-        @keyframes scrollIndicator {
-          0% {
-            transform: translateY(0);
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(24px);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </section>
   );
 }

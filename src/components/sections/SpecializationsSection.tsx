@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
@@ -80,8 +80,17 @@ export function SpecializationsSection({
       };
     });
 
+    mmRef.current = mm;
+  }, []);
+
+  // useLayoutEffect cleanup runs BEFORE DOM mutations — critical for pin: true
+  const mmRef = useRef<gsap.MatchMedia | null>(null);
+  useLayoutEffect(() => {
     return () => {
-      mm.revert();
+      if (mmRef.current) {
+        mmRef.current.revert();
+        mmRef.current = null;
+      }
     };
   }, []);
 
@@ -237,7 +246,7 @@ export const defaultSpecializations: Specialization[] = [
     title: 'Building',
     tagline: 'Building the Future',
     description: 'We mold spaces that inspire, innovate, and endure.',
-    image: '/images/projects/project-1.jpg',
+    image: '/images/services/service1.jpg',
     href: '/services/building',
   },
   {
@@ -245,7 +254,7 @@ export const defaultSpecializations: Specialization[] = [
     title: 'Water Treatment & Sanitation',
     tagline: 'Sanctuaries of Well-being',
     description: 'Elevating living conditions with advanced water treatment and sanitation.',
-    image: '/images/projects/project-2.jpg',
+    image: '/images/services/service2.jpg',
     href: '/services/water-treatment',
   },
   {
@@ -253,7 +262,7 @@ export const defaultSpecializations: Specialization[] = [
     title: 'Road and Drain',
     tagline: 'Pathways of Progress',
     description: 'Crafting roads and drains that lead societies towards advancement.',
-    image: '/images/projects/project-3.jpg',
+    image: '/images/services/service3.jpg',
     href: '/services/road-drain',
   },
   {
@@ -261,7 +270,7 @@ export const defaultSpecializations: Specialization[] = [
     title: 'Airport',
     tagline: 'Taking Flight',
     description: 'Building gateways to possibilities with airport construction.',
-    image: '/images/projects/project-1.jpg',
+    image: '/images/services/service4.jpg',
     href: '/services/airport',
   },
   {
@@ -269,7 +278,7 @@ export const defaultSpecializations: Specialization[] = [
     title: 'Irrigation',
     tagline: 'Nurturing Growth',
     description: 'Engineering irrigation solutions that nurture landscapes and livelihoods.',
-    image: '/images/projects/project-2.jpg',
+    image: '/images/services/service5.jpg',
     href: '/services/irrigation',
   },
   {
@@ -277,7 +286,7 @@ export const defaultSpecializations: Specialization[] = [
     title: 'Energy',
     tagline: 'Powering Progress',
     description: 'Energizing growth through cutting-edge energy solutions.',
-    image: '/images/projects/project-3.jpg',
+    image: '/images/services/service6.jpg',
     href: '/services/energy',
   },
   {
@@ -285,7 +294,7 @@ export const defaultSpecializations: Specialization[] = [
     title: 'Water Supply',
     tagline: 'Fluid Connections',
     description: 'Ensuring communities thrive with efficient water supply networks.',
-    image: '/images/projects/project-1.jpg',
+    image: '/images/services/service-center.jpg',
     href: '/services/water-supply',
   },
   {
@@ -293,7 +302,7 @@ export const defaultSpecializations: Specialization[] = [
     title: 'Bridge and Culvert',
     tagline: 'Bridges to Unity',
     description: 'Connecting hearts and places through bridges and culverts.',
-    image: '/images/projects/project-2.jpg',
+    image: '/images/services/infrastructure.jpg',
     href: '/services/bridge-culvert',
   },
 ];

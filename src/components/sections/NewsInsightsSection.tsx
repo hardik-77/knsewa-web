@@ -154,7 +154,7 @@ function GridArticle({ article }: { article: NewsArticle }) {
     <Link href={`/insights/${article.slug}`} className="group block">
       {/* Image with rounded corners */}
       <div
-        className="relative aspect-[16/10] overflow-hidden rounded-xl"
+        className="relative aspect-[16/10] overflow-hidden rounded-2xl"
         style={{ marginBottom: '18px' }}
       >
         <Image

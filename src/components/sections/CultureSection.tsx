@@ -133,7 +133,7 @@ export function CultureSection({
             <SwiperSlide key={commitment.id}>
               <div className="grid lg:grid-cols-2 items-center" style={{ gap: 'clamp(2rem, 5vw, 5rem)' }}>
                 {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                   <Image
                     src={commitment.image}
                     alt={commitment.title}
@@ -169,21 +169,6 @@ export function CultureSection({
         </Swiper>
       </div>
 
-      <style jsx global>{`
-        .culture-swiper .swiper-pagination {
-          position: relative;
-          margin-top: 2rem;
-        }
-        .culture-swiper .swiper-pagination-bullet {
-          width: 12px;
-          height: 12px;
-          background: rgba(255, 255, 255, 0.3);
-          opacity: 1;
-        }
-        .culture-swiper .swiper-pagination-bullet-active {
-          background: var(--color-accent);
-        }
-      `}</style>
     </section>
   );
 }

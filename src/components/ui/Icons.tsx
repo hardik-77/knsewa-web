@@ -180,6 +180,104 @@ export function ArrowIcon({ className = '' }: IconProps) {
   );
 }
 
+export function ChevronRightIcon({ className = '', width = 16, height = 16 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+export function CalendarIcon({ className = '', width = 24, height = 24 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M16 2V6M8 2V6M3 10H21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+export function ClockIcon({ className = '', width = 24, height = 24 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+export function CheckIcon({ className = '', width = 24, height = 24 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+export function QuoteIcon({ className = '', width = 24, height = 24 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M10 11H6C6 7.686 8.686 5 12 5V3C7.582 3 4 6.582 4 11V19H10V11ZM20 11H16C16 7.686 18.686 5 22 5V3C17.582 3 14 6.582 14 11V19H20V11Z" fill="currentColor"/>
+    </svg>
+  );
+}
+
+export function ExcellenceIcon({ className = '', width = 24, height = 24 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+export function IntegrityIcon({ className = '', width = 24, height = 24 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M9 12L11 14L15 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+export function SafetyIcon({ className = '', width = 24, height = 24 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M2 12C2 12 5 4 12 4C19 4 22 12 22 12C22 12 19 20 12 20C5 20 2 12 2 12Z" stroke="currentColor" strokeWidth="1.5"/>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5"/>
+    </svg>
+  );
+}
+
+export function InnovationIcon({ className = '', width = 24, height = 24 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M9 18H15M10 22H14M12 2V3M4.22 4.22L4.93 4.93M1 12H2M4.22 19.78L4.93 19.07M20 12H23M19.07 4.93L19.78 4.22M19.07 19.07L19.78 19.78" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M9 18C7.34 16.66 6 14.5 6 12C6 8.69 8.69 6 12 6C15.31 6 18 8.69 18 12C18 14.5 16.66 16.66 15 18" stroke="currentColor" strokeWidth="1.5"/>
+    </svg>
+  );
+}
+
+export function CommunityIcon({ className = '', width = 24, height = 24 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M23 21V19C22.9986 18.1137 22.7005 17.2528 22.1523 16.5523C21.6041 15.8519 20.8368 15.3516 19.9746 15.13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M16 3.13C16.8604 3.35031 17.6259 3.85071 18.1721 4.55232C18.7183 5.25392 19.0144 6.11683 19.0144 7.005C19.0144 7.89318 18.7183 8.75608 18.1721 9.45769C17.6259 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+export function SustainabilityIcon({ className = '', width = 24, height = 24 }: IconProps) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M12 22C12 22 4 18 4 11V4L12 2L20 4V11C20 18 12 22 12 22Z" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M8 14C8 14 9 12 12 12C15 12 16 10 16 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="12" cy="8" r="2" stroke="currentColor" strokeWidth="1.5"/>
+    </svg>
+  );
+}
+
 export function ChevronDownIcon({ className = '' }: IconProps) {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>

@@ -94,8 +94,14 @@ export interface Project {
   title: string;
   category: string;
   clientType: 'government' | 'commercial' | 'institutional';
+  client?: string;
+  description?: string;
   location: string;
   scope: string;
+  status?: 'completed' | 'running';
+  completionPercentage?: number;
+  contractValue?: string;
+  year?: string;
   highlights: string[];
   images: {
     thumbnail: string;
@@ -227,6 +233,263 @@ export interface TwoColumnContent {
     href: string;
   };
   imagePosition?: 'left' | 'right';
+}
+
+// Breadcrumb
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+// Page Hero (Inner Pages)
+export interface PageHeroContent {
+  label: string;
+  headline: string;
+  description?: string;
+  backgroundImage: string;
+  breadcrumbs: BreadcrumbItem[];
+}
+
+// Section Header (Reusable)
+export interface SectionHeaderContent {
+  label?: string;
+  headline: string;
+  description?: string;
+}
+
+// Team Member
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+}
+
+// Timeline Item
+export interface TimelineItem {
+  year: string;
+  title: string;
+  description: string;
+  image?: string;
+}
+
+// Value Item (Mission & Values)
+export interface ValueItem {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+}
+
+// Service Category (Services Landing)
+export interface ServiceCategory {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+}
+
+// Capability (Services Landing)
+export interface Capability {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  href: string;
+}
+
+// Province (Coverage)
+export interface Province {
+  id: string;
+  name: string;
+  slug: string;
+  projectCount: number;
+  description: string;
+  locations: string[];
+}
+
+// Office Location (Contact)
+export interface OfficeLocation {
+  id: string;
+  name: string;
+  address: string;
+  phone: string;
+  email: string;
+  isHeadquarters?: boolean;
+}
+
+// Job Listing (Careers)
+export interface JobListing {
+  id: string;
+  title: string;
+  department: string;
+  location: string;
+  type: 'full-time' | 'part-time' | 'contract';
+  description: string;
+  requirements: string[];
+}
+
+// Service Detail
+export interface ServiceDetailContent {
+  seo: SEOData;
+  hero: PageHeroContent;
+  overview: TwoColumnContent;
+  process: ProcessStep[];
+  relatedServices: ServiceCategory[];
+}
+
+// Process Step
+export interface ProcessStep {
+  id: string;
+  step: string;
+  title: string;
+  description: string;
+}
+
+// Projects Page Content
+export interface ProjectsPageContent {
+  seo: SEOData;
+  hero: PageHeroContent;
+  stats: Stat[];
+  categories: string[];
+  projects: Project[];
+  cta: CTAContent;
+}
+
+// About Page Content
+export interface AboutPageContent {
+  seo: SEOData;
+  hero: PageHeroContent;
+  introduction: TwoColumnContent;
+  stats: Stat[];
+  values: {
+    label: string;
+    headline: string;
+    items: ValueItem[];
+  };
+  timeline: {
+    label: string;
+    headline: string;
+    items: TimelineItem[];
+  };
+  team: {
+    label: string;
+    headline: string;
+    members: TeamMember[];
+  };
+  culture: CultureCommitment[];
+  cta: CTAContent;
+}
+
+// Services Page Content
+export interface ServicesPageContent {
+  seo: SEOData;
+  hero: PageHeroContent;
+  philosophy: {
+    quote: string;
+    description: string;
+  };
+  specializations: Specialization[];
+  categories: {
+    label: string;
+    headline: string;
+    items: ServiceCategory[];
+  };
+  approach: {
+    label: string;
+    headline: string;
+    steps: ProcessStep[];
+  };
+  capabilities: {
+    label: string;
+    headline: string;
+    items: Capability[];
+  };
+  stats: Stat[];
+  cta: CTAContent;
+}
+
+// Contact Page Content
+export interface ContactPageContent {
+  seo: SEOData;
+  hero: PageHeroContent;
+  form: {
+    label: string;
+    headline: string;
+    description: string;
+  };
+  offices: OfficeLocation[];
+  cta: CTAContent;
+}
+
+// Coverage Page Content
+export interface CoveragePageContent {
+  seo: SEOData;
+  hero: PageHeroContent;
+  overview: TwoColumnContent;
+  provinces: {
+    label: string;
+    headline: string;
+    items: Province[];
+  };
+  stats: Stat[];
+  cta: CTAContent;
+}
+
+// Insights Page Content
+export interface InsightsPageContent {
+  seo: SEOData;
+  hero: PageHeroContent;
+  listing: {
+    label: string;
+    headline: string;
+    categories: string[];
+  };
+  cta: CTAContent;
+}
+
+// Careers Page Content
+export interface CareersPageContent {
+  seo: SEOData;
+  hero: PageHeroContent;
+  introduction: TwoColumnContent;
+  culture: CultureCommitment[];
+  jobs: {
+    label: string;
+    headline: string;
+    listings: JobListing[];
+  };
+  stats: Stat[];
+  cta: CTAContent;
+}
+
+// Safety Page Content
+export interface SafetyPageContent {
+  seo: SEOData;
+  hero: PageHeroContent;
+  introduction: TwoColumnContent;
+  values: {
+    label: string;
+    headline: string;
+    items: ValueItem[];
+  };
+  stats: Stat[];
+  cta: CTAContent;
+}
+
+// Sustainability Page Content
+export interface SustainabilityPageContent {
+  seo: SEOData;
+  hero: PageHeroContent;
+  introduction: TwoColumnContent;
+  values: {
+    label: string;
+    headline: string;
+    items: ValueItem[];
+  };
+  stats: Stat[];
+  cta: CTAContent;
 }
 
 // Home Page Content

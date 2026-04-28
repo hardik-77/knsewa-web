@@ -169,7 +169,7 @@ export const homePageContent: HomePageContent = {
         title: 'Infrastructure Development',
         shortTitle: 'Infrastructure',
         description: 'Essential infrastructure that connects communities and drives economic growth. Our expertise includes roads, bridges, water systems, and urban development projects.',
-        image: '/images/services/infrastructure.jpg',
+        image: '/images/hero-construction.jpg',
         href: '/services#infrastructure',
       },
     ],
@@ -299,7 +299,7 @@ export const homePageContent: HomePageContent = {
       title: 'Building',
       tagline: 'Building the Future',
       description: 'We mold spaces that inspire, innovate, and endure.',
-      image: '/images/projects/project-1.jpg',
+      image: '/images/services/service1.jpg',
       href: '/services/building',
     },
     {
@@ -307,7 +307,7 @@ export const homePageContent: HomePageContent = {
       title: 'Water Treatment & Sanitation',
       tagline: 'Sanctuaries of Well-being',
       description: 'Elevating living conditions with advanced water treatment and sanitation.',
-      image: '/images/projects/project-2.jpg',
+      image: '/images/services/service2.jpg',
       href: '/services/water-treatment',
     },
     {
@@ -315,7 +315,7 @@ export const homePageContent: HomePageContent = {
       title: 'Road and Drain',
       tagline: 'Pathways of Progress',
       description: 'Crafting roads and drains that lead societies towards advancement.',
-      image: '/images/projects/project-3.jpg',
+      image: '/images/services/service3.jpg',
       href: '/services/road-drain',
     },
     {
@@ -323,7 +323,7 @@ export const homePageContent: HomePageContent = {
       title: 'Airport',
       tagline: 'Taking Flight',
       description: 'Building gateways to possibilities with airport construction.',
-      image: '/images/projects/project-1.jpg',
+      image: '/images/services/service4.jpg',
       href: '/services/airport',
     },
     {
@@ -331,7 +331,7 @@ export const homePageContent: HomePageContent = {
       title: 'Irrigation',
       tagline: 'Nurturing Growth',
       description: 'Engineering irrigation solutions that nurture landscapes and livelihoods.',
-      image: '/images/projects/project-2.jpg',
+      image: '/images/services/service5.jpg',
       href: '/services/irrigation',
     },
     {
@@ -339,7 +339,7 @@ export const homePageContent: HomePageContent = {
       title: 'Energy',
       tagline: 'Powering Progress',
       description: 'Energizing growth through cutting-edge energy solutions.',
-      image: '/images/projects/project-3.jpg',
+      image: '/images/services/service6.jpg',
       href: '/services/energy',
     },
     {
@@ -347,7 +347,7 @@ export const homePageContent: HomePageContent = {
       title: 'Water Supply',
       tagline: 'Fluid Connections',
       description: 'Ensuring communities thrive with efficient water supply networks.',
-      image: '/images/projects/project-1.jpg',
+      image: '/images/services/service-center.jpg',
       href: '/services/water-supply',
     },
     {
@@ -355,7 +355,7 @@ export const homePageContent: HomePageContent = {
       title: 'Bridge and Culvert',
       tagline: 'Bridges to Unity',
       description: 'Connecting hearts and places through bridges and culverts.',
-      image: '/images/projects/project-2.jpg',
+      image: '/images/services/infrastructure.jpg',
       href: '/services/bridge-culvert',
     },
   ],

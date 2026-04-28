@@ -650,6 +650,52 @@ title: Page Title
 
 ---
 
+## Security Model (Dev vs Prod Protection)
+
+This architecture separates development (free access) from production (protected).
+
+| Environment | Who Can Access | Protection Mechanism |
+|-------------|----------------|----------------------|
+| **Development** | Any developer | None - free to edit, hot reload works |
+| **Production** | Root only | `su -c` in deploy.sh requires root password |
+
+### Why This Matters
+
+- **Developers** (Hardik, Anish, Manjila, etc.) can freely work on dev environment
+- **Production deployments** require root password - prevents accidental deploys
+- **`_site-prod/`** directory is owned by `root:root` - can't be edited directly
+- **`_site-dev/`** directory is writable by anyone - safe for experimentation
+
+### Deployment Workflow
+
+```
+1. Developer edits src/ files
+   ↓
+2. Dev site updates instantly (hot reload) - no password needed
+   ↓
+3. When ready for production → run ./deploy.sh
+   ↓
+4. Script prompts for ROOT PASSWORD
+   ↓
+5. Only authorized deploys succeed
+```
+
+### What Gets Protected
+
+```bash
+# In deploy.sh - this block requires root password
+su -c "
+    rm -rf '_site-prod/' && \
+    mv '_site-prod-temp/' '_site-prod/' && \
+    chown -R root:root '_site-prod/' && \
+    chmod -R 755 '_site-prod/'
+"
+```
+
+**Result:** Production files are owned by root, immutable without root access.
+
+---
+
 ## Troubleshooting
 
 | Issue | Solution |

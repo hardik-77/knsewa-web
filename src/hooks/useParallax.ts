@@ -142,7 +142,8 @@ export function useBackgroundParallax<T extends HTMLElement>(
 // Counter animation that triggers on scroll
 export function useCounterAnimation(
   targetValue: number,
-  options: { duration?: number; suffix?: string; prefix?: string } = {}
+  onUpdate: (value: number) => void,
+  options: { duration?: number } = {}
 ) {
   const ref = useRef<HTMLElement>(null);
 
@@ -150,10 +151,10 @@ export function useCounterAnimation(
     const element = ref.current;
     if (!element) return;
 
-    const { duration = 2, suffix = '', prefix = '' } = options;
+    const { duration = 2 } = options;
     const counter = { value: 0 };
 
-    ScrollTrigger.create({
+    const st = ScrollTrigger.create({
       trigger: element,
       start: 'top 80%',
       onEnter: () => {
@@ -162,19 +163,15 @@ export function useCounterAnimation(
           duration,
           ease: 'power2.out',
           onUpdate: () => {
-            element.textContent = `${prefix}${Math.round(counter.value)}${suffix}`;
+            onUpdate(Math.round(counter.value));
           },
         });
       },
       once: true,
     });
 
-    return () => {
-      ScrollTrigger.getAll()
-        .filter((t) => t.trigger === element)
-        .forEach((t) => t.kill());
-    };
-  }, [targetValue, options]);
+    return () => { st.kill(); };
+  }, [targetValue, onUpdate, options]);
 
   return ref;
 }

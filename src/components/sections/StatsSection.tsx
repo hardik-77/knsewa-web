@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { GridLines } from '@/components/ui/GridLines';
@@ -17,6 +17,7 @@ interface StatsSectionProps {
 function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const numericValue = parseInt(value, 10);
+  const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
     const element = ref.current;
@@ -24,7 +25,7 @@ function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: strin
 
     const counter = { value: 0 };
 
-    ScrollTrigger.create({
+    const st = ScrollTrigger.create({
       trigger: element,
       start: 'top 80%',
       onEnter: () => {
@@ -33,23 +34,19 @@ function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: strin
           duration: 2,
           ease: 'power2.out',
           onUpdate: () => {
-            element.textContent = `${Math.round(counter.value)}${suffix}`;
+            setDisplayValue(Math.round(counter.value));
           },
         });
       },
       once: true,
     });
 
-    return () => {
-      ScrollTrigger.getAll()
-        .filter((t) => t.trigger === element)
-        .forEach((t) => t.kill());
-    };
+    return () => { st.kill(); };
   }, [numericValue, suffix]);
 
   return (
     <span ref={ref} className="tabular-nums">
-      0{suffix}
+      {displayValue}{suffix}
     </span>
   );
 }

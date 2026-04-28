@@ -8,15 +8,11 @@ services:
     labels:
       - "traefik.enable=true"
       # Router
-      - "traefik.http.routers.knsewa-web-prod.rule=Host(`knsewa.com`) || Host(`www.knsewa.com`)"
+      - "traefik.http.routers.knsewa-web-prod.rule=Host(`knsewa.com`)"
       - "traefik.http.routers.knsewa-web-prod.entrypoints=websecure"
       - "traefik.http.routers.knsewa-web-prod.tls.certresolver=letsencrypt"
       # Service
       - "traefik.http.services.knsewa-web-prod.loadbalancer.server.port=80"
-      # Middleware: WWW Redirect
-      - "traefik.http.middlewares.knsewa-web-www-redirect.redirectregex.regex=^https://www\\.knsewa\\.com/(.*)"
-      - "traefik.http.middlewares.knsewa-web-www-redirect.redirectregex.replacement=https://knsewa.com/$${1}"
-      - "traefik.http.routers.knsewa-web-prod.middlewares=knsewa-web-www-redirect"
 
 networks:
   hosting:

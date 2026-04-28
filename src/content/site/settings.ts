@@ -3,16 +3,15 @@ import { SiteSettings, NavItem } from '@/types/content';
 export const siteSettings: SiteSettings = {
   name: 'Khushbu Nirman Sewa',
   tagline: 'Building Nepal\'s Future for 30 Years',
-  phone: '+977-21-123456',
-  email: 'info@knsewa.com',
+  phone: '021-503204',
+  email: 'khushbunirmansewa@gmail.com',
   address: {
-    street: 'Main Road, Biratnagar',
+    street: 'Biratnagar',
     city: 'Biratnagar',
     country: 'Nepal',
   },
   social: {
-    facebook: 'https://facebook.com/knsewa',
-    linkedin: 'https://linkedin.com/company/knsewa',
+    facebook: 'https://facebook.com/khushbunirman.sewa.1',
   },
 };
 
