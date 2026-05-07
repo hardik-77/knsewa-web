@@ -29,10 +29,6 @@ export const mainNavigation: NavItem[] = [
     href: '/projects',
   },
   {
-    label: 'Coverage',
-    href: '/coverage',
-  },
-  {
     label: 'Insights',
     href: '/insights',
   },
@@ -46,7 +42,6 @@ export const footerNavigation: NavItem[] = [
   { label: 'About Us', href: '/about' },
   { label: 'Services', href: '/services' },
   { label: 'Projects', href: '/projects' },
-  { label: 'Coverage', href: '/coverage' },
   { label: 'Insights', href: '/insights' },
   { label: 'Contact', href: '/contact' },
 ];

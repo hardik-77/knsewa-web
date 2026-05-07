@@ -188,12 +188,8 @@ export const homePageContent: HomePageContent = {
     image: '/images/coverage-nepal.jpg',
     imageAlt: 'Construction project in Nepal',
     cta: {
-      text: 'Meet the Biratnagar Team',
-      href: '/coverage/biratnagar',
-    },
-    secondaryLink: {
-      text: 'Choose another location',
-      href: '/coverage',
+      text: 'Explore Our Projects',
+      href: '/projects',
     },
     imagePosition: 'left',
   },
