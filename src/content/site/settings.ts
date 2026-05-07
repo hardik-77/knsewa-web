@@ -6,7 +6,7 @@ export const siteSettings: SiteSettings = {
   phone: '021-503204',
   email: 'khushbunirmansewa@gmail.com',
   address: {
-    street: 'Biratnagar',
+    street: 'Biratnagar, Morang',
     city: 'Biratnagar',
     country: 'Nepal',
   },
@@ -35,6 +35,10 @@ export const mainNavigation: NavItem[] = [
   {
     label: 'Insights',
     href: '/insights',
+  },
+  {
+    label: 'Contact',
+    href: '/contact',
   },
 ];
 

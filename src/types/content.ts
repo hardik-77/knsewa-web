@@ -316,6 +316,9 @@ export interface OfficeLocation {
   address: string;
   phone: string;
   email: string;
+  hours?: string;
+  mapUrl?: string;
+  mapEmbedUrl?: string;
   isHeadquarters?: boolean;
 }
 
@@ -414,10 +417,16 @@ export interface ServicesPageContent {
 export interface ContactPageContent {
   seo: SEOData;
   hero: PageHeroContent;
+  info: {
+    label: string;
+    headline: string;
+    description: string;
+  };
   form: {
     label: string;
     headline: string;
     description: string;
+    projectTypes: string[];
   };
   offices: OfficeLocation[];
   cta: CTAContent;

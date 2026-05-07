@@ -15,6 +15,7 @@ import { aboutPageContent } from '@/content/pages/about';
 import { servicesPageContent } from '@/content/pages/services';
 import { projectsPageContent } from '@/content/pages/projects';
 import { insightsPageContent, insightsArticles } from '@/content/pages/insights';
+import { contactPageContent } from '@/content/pages/contact';
 import type {
   SiteSettings,
   NavItem,
@@ -65,7 +66,7 @@ export function getServicesPage(): ServicesPageContent {
 }
 
 export function getContactPage(): ContactPageContent {
-  throw new Error('Contact page content not yet created.');
+  return contactPageContent;
 }
 
 export function getCoveragePage(): CoveragePageContent {
